@@ -20,7 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     
     Route::get('website', [WebsiteController::class, 'index'])->name('website');
-    
+    Route::get('website-add', [WebsiteController::class, 'add'])->name('website-add');
+    Route::get('website-save', [WebsiteController::class, 'handleCallback'])->name('website-save');
+
     Route::get('table', function () {
         return Inertia::render('websitetbl/page');
     })->name('table');

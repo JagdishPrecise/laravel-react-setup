@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react';
 
 import { columns } from "./table-list/columns"
 import { DataTable } from "./table-list/data-table"
-import data from "./table-list/data.json"
+// import data from "./table-list/data.json"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -14,7 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Website() {
+export default function Website({data}: any) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Website" />

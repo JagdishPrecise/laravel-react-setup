@@ -45,21 +45,21 @@ class GoogleController extends Controller
                 $google_oauth   = new Google_Service_Oauth2($client);
                 $googleUser     = $google_oauth->userinfo->get();
 
-                dd($googleUser);
                 $user           = User::where('email', $googleUser->email)->first();
 
                 if (!$user) {
                     $newUser = User::create([
                         'name'      => $googleUser->name,
                         'email'     => $googleUser->email,
-                        // 'googleId'  => $googleUser->id
+                        'googleId'  => $googleUser->id,
+                        'password'  => bcrypt('12345678'),
                     ]);
 
                     Auth::login($newUser);
                     return redirect('/dashboard');
                 } elseif ($user->email == $googleUser->email && $user->googleId == '') {
                     $user->update([
-                        // 'googleId' => $googleUser->id
+                        'googleId' => $googleUser->id
                     ]);
 
                     Auth::login($user);

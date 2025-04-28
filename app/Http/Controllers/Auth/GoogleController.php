@@ -34,6 +34,12 @@ class GoogleController extends Controller
     {
 
         try {
+            
+            if ($request->has('error') && $request->error === 'access_denied') {
+                \Log::warning('User denied access during Google login.');
+                return redirect('/login?error=Google login was cancelled.');
+            }
+
             $client       = new Google_Client();
             $client->setClientId(env('GOOGLE_CLIENT_ID'));
             $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
